@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Parallax</title>
+
+	<link rel="stylesheet" href="../../src/parallax.css" type="text/css">
+	<style>
+		p { clear:both; }
+		.parallax-wrap { overflow:hidden; display:inline-block; float:left; padding-right:20px; max-height:250px; }
+		.item { position:absolute; z-index:-1; opacity:0.5; background:#ccc; width:40px; height:40px; border-radius:20px; }
+		.item:nth-child(1) { top:0%; left:10% }
+		.item:nth-child(2) { top:0%; left:30% }
+		.item:nth-child(3) { top:0%; left:50% }
+		.item:nth-child(4) { top:0%; left:70% }
+		.item:nth-child(5) { top:0%; left:90% }
+	</style>
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+	<header>
+		<h1>Parallax Demo</h1>
+	</header>
+
+	<main>
+		<nav>
+			<div class="container">
+				<ul></ul>
+			</div>
+		</nav>
+
+		<section data-nav="About" id="about">
+			<div class="container">
+				<h2>About</h2>
+				<p>Parallax. Stuff moves on scroll.</p>
+
+				<h3>A Note On Approaches</h3>
+				<p>There are several ways to apprach building a parallax effect on a site. Paul Lewis has
+				<a href="http://www.html5rocks.com/en/tutorials/speed/parallax/">a great overview</a> on the
+				popular techiniques and their pros and cons. In brief:</p>
+				<ul>
+					<li><strong>absolute positioning</strong>: this includes positioning elements absolutely
+					as well as positioning a background image attachment. In general, this is the absolute worst
+					way to do parallax from a performance point of view. Everything must be recalculated and re-
+					painted on scroll, so avoid this if possible. The upside: you can support IE8 this way.</li>
+					<li><strong>3D transforms</strong>: how the code herein operates. We offload elements in their
+					own render layer to the GPU for X- or Y-transforms. <i>Almost</i> the most efficient (see
+					below), but still very flexible and easy to implement. Browsers need to support transforms.</li>
+					<li><strong>canvas</strong>: one fixed element background (a canvas), that animates on scroll.
+					Elements are placed into the canvas moved about on scroll -- this is the most efficient, but
+					difficult to implement (or impossible if you wish to use existing DOM elements).</li>
+				</ul>
+			</div>
+		</section>
+
+		<section data-nav="Download"id="download" >
+			<div class="container">
+				<h2>Download</h2>
+				<p><a href="https://stash.hugeinc.com/projects/BOWER/repos/xxxxx/browse">Stash repo</a></p>
+			</div>
+		</section>
+
+		<section data-nav="Demo" id="demo">
+			<div class="container">
+				<h2>Demo</h2>
+
+
+
+				<!-- <div style="position:absolute; width:100%; height:100%; overflow:hidden;"> -->
+				<div>
+					<div class="parallax item" data-parallax-speed="1"></div>
+					<div class="parallax item" data-parallax-speed="0.5"></div>
+					<div class="parallax item" data-parallax-speed="0"></div>
+					<div class="parallax item" data-parallax-speed="-0.5"></div>
+					<div class="parallax item" data-parallax-speed="-1.0"></div>
+				</div>
+
+				<p class="parallax" data-parallax-speed="1.4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+				<div class="parallax" data-parallax-speed="0.4" style="float:right" >
+					<img src="http://malformed.ca/wesley.jpg" alt="" />
+				</div>
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+				<div class="parallax" data-parallax-speed="-0.4" style="float:left">
+					<img src="http://malformed.ca/wesley.jpg" alt="" />
+				</div>
+			</div>
+		</section>
+
+		<section data-nav="Prereqs" id="prereqs">
+			<div class="container">
+				<h2>Prereqs</h2>
+				<p>jQuery</p>
+			</div>
+		</section>
+
+		<section data-nav="Compatibility" id="compatibility">
+			<div class="container">
+				<h2>Compatibility</h2>
+				<ul>
+					<li>IE9+</li>
+					<li>Firefox, Webkit, Opera</li>
+					<li>no mobile</li>
+				</ul>
+			</div>
+		</section>
+
+		<section data-nav="Code" id="code">
+			<div class="container">
+				<h2>Code</h2>
+{% highlight javascript %}
+parallax.init({
+	el: '.parallax'
+});
+{% endhighlight %}
+			</div>
+		</section>
+
+		<section data-nav="Options" id="options">
+			<div class="container">
+				<h2>Options</h2>
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width: 100px;">Name</th>
+								<th style="width: 50px;">type</th>
+								<th style="width: 50px;">default</th>
+								<th>description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>el</td>
+								<td>string</td>
+								<td>parallax</td>
+								<td>selector of HTMLDomElement to use</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<footer>
+
+	</footer>
+
+	<script src="../../libs/jquery-1.11.0.min.js"></script>
+	<script src="../../dist/parallax.min.js"></script>
+	<script>window.onLoad = parallax.init({el: '.parallax'})</script>
+
+</body>
+</html>
+
