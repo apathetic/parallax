@@ -54,8 +54,7 @@ module.exports = function(grunt) {
 			},
 			build: {
 				files: {
-					'dist/<%= pkg.name %>.min.js': ['src/<%= pkg.name %>.js'],
-					'dist/collisionManager.min.js': ['src/collisionManager.js']
+					'dist/<%= pkg.name %>.min.js': ['src/<%= pkg.name %>.js']
 				}
 			}
 		},
@@ -71,7 +70,7 @@ module.exports = function(grunt) {
 
 		watch: {
 			main: {
-				files: [ 'Gruntfile.js', 'src/<%= pkg.name %>.js', 'src/collisionManager.js', 'src/<%= pkg.name %>.css' ],
+				files: [ 'Gruntfile.js', 'src/<%= pkg.name %>.js', 'src/<%= pkg.name %>.css' ],
 				tasks: 'default'
 			}
 		}
