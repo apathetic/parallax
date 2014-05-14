@@ -25,7 +25,7 @@ Download the [production version][min] or the [development version][max].
 [min]: https://github.com/apathetic/parallax/blob/master/dist/parallax.min.js
 [max]: https://github.com/apathetic/parallax/blob/master/src/parallax.js
 
-Include the relevant scripts in your web page, and then:
+Include the relevant scripts in your web page, and then*:
 
 ```html
 <script>
@@ -35,14 +35,24 @@ Include the relevant scripts in your web page, and then:
 </script>
 ```
 
+### Integration into your project
+You'll notice that this (by default) adds a property to the Global namespace. This isn't necessarily a bad thing; rather, the onus is now on
+you to do what you wish with it.
+
+If you're using a build script (ie. Grunt), you can [_deglobalify_][deglobalify] and [_browserify_][browserify], for example, and deal with
+the <code>parallax</code> object as you'd wish. See [this article][article] on Browserify for more info.
+
+[deglobalify]: https://www.npmjs.org/package/deglobalify
+[browserify]: https://www.npmjs.org/package/grunt-browserify
+[article]: http://dontkry.com/posts/code/browserify-and-the-universal-module-definition.html
+
+
+## Documentation
 Elements on the page can have different attributes, as referenced through particular data-atrributes. For example:
 
 ```html
 <div class="parallax item" data-parallax-speed="1" data-parallax-delay="100"></div>
 ```
-
-## Documentation
-...
 
 
 ## Support
@@ -54,7 +64,7 @@ Elements on the page can have different attributes, as referenced through partic
 
 ## Examples
 
-Please see the _test / demo_ directory
+Please see the _demo_ directory
 
 ## Release History
 
