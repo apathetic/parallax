@@ -23,10 +23,6 @@ module.exports = function(grunt) {
 					' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
 		},
 
-		qunit: {
-			files: ['test/**/*.html']
-		},
-
 		jshint: {
 			options: {
 				curly: true,
@@ -46,6 +42,26 @@ module.exports = function(grunt) {
 				}
 			},
 			files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
+		},
+
+		karma: {
+			options: {
+				autoWatch: false,
+				browsers: ['PhantomJS'],
+				colors: true,
+				files: [
+					'src/*.js',
+					'test/*.js',
+					{ pattern: 'test/fixture.html', watched:true, served:true, included:false },
+				],
+				frameworks: ['jasmine'],
+				port: testPort,
+				reporters: ['progress'],
+				singleRun: true
+			},
+			unit: {
+
+			}
 		},
 
 		uglify: {
@@ -82,18 +98,17 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'default', [
 		'jshint',
 		'uglify',
-		// 'qunit'
+		'karma'
 	]);
 
 	grunt.registerTask('build', [
 		'jshint',
-		// 'qunit',
 		'uglify'
 	]);
 
 	grunt.registerTask('test', [
 		'jshint',
-		'qunit'
+		'karma:unit'
 	]);
 
 	grunt.registerTask('serve', [
