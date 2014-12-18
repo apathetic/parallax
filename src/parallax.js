@@ -2,38 +2,32 @@
  * parallax
  * https://github.com/apathetic/parallax
  *
- * Copyright (c) 2013 Wes Hatch
+ * Copyright (c) 2013, 2014 Wes Hatch
  * Licensed under the MIT license.
  *
  */
 
 
-var parallax = (function(window, undefined ) {
+;(function(root) {
 
 	'use strict';
 
 	var parallax,
 		ticking = false,
-		scroll = window.scrollY,	// 0
+		mode = 1,
+		scroll = window.scrollY,
 		height = window.innerHeight,
-		transform = 'webkitTransform';		// [TODO]
+		transform = (function(){
+				var transforms = ['transform', 'webkitTransform', 'MozTransform', 'OTransform'],
+					i = transforms.length,
+					el = document.createElement('fake');
 
-		/*
-		var transform = (function() {
-			return 'webkitTransform';
-			var p,
-				el = document.createElement('fake'),
-				prefixes = ['webkit', 'Moz', 'o', 'ms'];
-
-			for (p in prefixes) {
-				if (typeof el.style[prefixes[i] + propertie] !== 'undefined') {
-					cssPrefixString[propertie] = prefixes[i];
-					return prefixes[i] + propertie;
+				for (i; --i;) {
+					// note: we don't test "ms" prefix, (as that gives us IE9 which doesn't support transforms3d anyway. IE10 test will work with "transform")
+					if ( el.style[ transforms[i] ] !== undefined) { return transforms[i]; }
 				}
-			}
-			return false;
-		}());
-		*/
+				return false;
+			})();
 
 
 	function onScroll() {
@@ -45,88 +39,82 @@ var parallax = (function(window, undefined ) {
 	}
 
 	function onResize() {
-		scroll = window.scrollY;
 		height = window.innerHeight;
 		updateParallax();
 	}
 
 	function updateParallax() {
-
-		var position;
-		// var offset = 444;	//
-
-		Array.prototype.forEach.call(parallax, function(p, i){
-
-			var speed = p.parallaxSpeed;
-			var top = p.getBoundingClientRect().top;
-			var offset = 0;	// p.parallaxOffset;
-
-			position = (speed * scroll) + offset;
-
-			p.style[transform] = 'translate3d(0, '+ position +'px , 0)';
-		});
-
+		Array.prototype.forEach.call(parallax, calculate);
 		ticking = false;
 	}
 
+	function calculate(p) {
+		var offset = p.getBoundingClientRect().top,
+			range = 200,												// could be dynamic for each element
+			position;
 
-	return {
+		if (height < (offset - range) ) { return; }						// dont start parallaxin' until this here thing is within range (ie. "range" pixels from the bottom of the screen)
+
+
+		if (mode) {
+			// parallax items only when they appear on screen
+			position = Math.min(1, -offset / height) * range;			// 0 -> range
+			position *= p.parallaxSpeed;
+		} else {
+			// parallax items immediately, irrespective of where they are on the page
+			position = (p.parallaxSpeed * scroll);
+		}
+
+
+		p.style[transform] = 'translate3d(0, '+ position +'px, 0)';		// no IE9, nor non 3d-accellerated browsers
+	}
+
+
+	var api = {
 		init: function(opts) {
-			// if(!core.Utils.isTouchDevice && sections.length > 0) {
-				if (!transform) { return false; } // progressive enhancement for newer browers only.
+			parallax = document.querySelectorAll(opts.el || '.parallax');
 
-				// [TODO] add some checks or sumthing
-				parallax = document.querySelectorAll(opts.el || '.parallax');
-				/*
-				parallax = $(opts.el) || $('.parallax');
-				parallax.each(function() {
-					this.parallaxSpeed = $(this).data('parallax-speed') || 1;	// store on HTMLElement
-				});
-				*/
+			if ( !parallax )  { return false; }
+			if ( !transform ) { return false; }												 // progressive enhancement for newer browers only.
 
-				if ( !parallax ) { return false; }
+			Array.prototype.forEach.call(parallax, function(p, i){
 
-
-				Array.prototype.forEach.call(parallax, function(p, i){
-
-					// speed:
-					// -1: translate up as fast as you scroll up ie. moving up 2x
-					//  0: normal ie. no translation
-					//  1: translate down as fast as you scroll up ie. "fixed" position
-					p.parallaxSpeed = +(p.getAttribute('data-parallax-speed') || 0);			// + is poor man's parseInt
-					// p.parallaxOffset = Math.max(0, p.getBoundingClientRect().top - height);		// how far below the bottom of the page
-
-					// no can do, as images load slowly, affecting the layout of the page:
-					setTimeout(function(){
-					p.parallaxOffset = Math.max(0, p.getBoundingClientRect().top - window.scrollY);		// how far below the bottom of the page
-					}, 1000);
-					// this.parallaxDirection = this.getAttribute('data-parallax-direction');
+				// speed:
+				// -1: translate up as fast as you scroll up ie. moving up 2x
+				//  0: normal ie. no translation
+				//  1: translate down as fast as you scroll up ie. "fixed" position
+				p.parallaxSpeed = +(p.getAttribute('data-parallax-speed') || 0);			// + is poor man's parseInt
 
 
+				// Calculate each element's initial position:
+				// here we find the limit as the offset and adjustment converge:
+				var current = p.getBoundingClientRect().top;
+				var last = 0;
+				while ( Math.abs(current - last) > 1 ) {
+					last = current;
+					calculate(p);
+					current = p.getBoundingClientRect().top;
+				}
 
+			});
 
-
-
-
-
-
-				});
-
-
-				updateParallax();
-
-				// kick off
-				window.addEventListener('scroll', onScroll, false);
-				window.addEventListener('resize', onResize, false);
-			// }
+			this.scrollListener = window.addEventListener('scroll', onScroll, false);
+			this.resizeListener = window.addEventListener('resize', onResize, false);
 		},
 		destroy: function() {
-			window.removeEventListenter('scroll');
-			window.removeEventListenter('resize');
+			window.removeEventListenter(this.scrollListener);
+			window.removeEventListenter(this.resizeListener);
 			parallax = null;
 		}
 	};
 
+
+	// return api;
+	if (typeof define === 'function' && define.amd) {
+		define(['parallax'], api);
+	} else {
+		root.parallax = api;
+	}
 
 }( window ));
 

@@ -41,7 +41,8 @@ module.exports = function(grunt) {
 					'jQuery': true
 				}
 			},
-			files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
+			// files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
+			files: ['Gruntfile.js', 'src/parallax_v3.js', 'test/**/*.js']
 		},
 
 		karma: {
@@ -55,7 +56,7 @@ module.exports = function(grunt) {
 					{ pattern: 'test/fixture.html', watched:true, served:true, included:false },
 				],
 				frameworks: ['jasmine'],
-				port: testPort,
+				port: 8765,
 				reporters: ['progress'],
 				singleRun: true
 			},
@@ -87,7 +88,7 @@ module.exports = function(grunt) {
 		watch: {
 			main: {
 				files: [ 'Gruntfile.js', 'src/<%= pkg.name %>.js', 'src/<%= pkg.name %>.css' ],
-				tasks: 'default'
+				tasks: 'build'
 			}
 		}
 

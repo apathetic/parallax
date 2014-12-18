@@ -6,14 +6,16 @@
 
 	<link rel="stylesheet" href="../../src/parallax.css" type="text/css">
 	<style>
-		p { clear:both; }
-		.parallax-wrap { overflow:hidden; display:inline-block; float:left; padding-right:20px; max-height:250px; }
+		* { -webkit-font-smoothing: antialiased; }
+		main { overflow:hidden; }
+		p { margin-bottom:1em; clear:both; }
 		.item { position:absolute; z-index:-1; opacity:0.5; background:#ccc; width:40px; height:40px; border-radius:20px; }
 		.item:nth-child(1) { top:0%; left:10% }
 		.item:nth-child(2) { top:0%; left:30% }
 		.item:nth-child(3) { top:0%; left:50% }
 		.item:nth-child(4) { top:0%; left:70% }
 		.item:nth-child(5) { top:0%; left:90% }
+		img { max-width:240px;height:auto }
 	</style>
 
 	<!--[if lt IE 9]>
@@ -80,7 +82,7 @@
 					<div class="parallax item" data-parallax-speed="-1.0"></div>
 				</div>
 
-				<p class="parallax" data-parallax-speed="1.4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				<p class="parallax" data-parallax-speed="0.7">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -88,7 +90,7 @@
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 				<div class="parallax" data-parallax-speed="0.4" style="float:right" >
-					<img src="http://malformed.ca/wesley.jpg" alt="" />
+					<img src="images/pacer.jpg" alt="" />
 				</div>
 
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -99,7 +101,7 @@
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 				<div class="parallax" data-parallax-speed="-0.4" style="float:left">
-					<img src="http://malformed.ca/wesley.jpg" alt="" />
+					<img src="images/pacer.jpg" alt="" />
 				</div>
 			</div>
 		</section>
@@ -165,9 +167,13 @@ parallax.init({
 
 	</footer>
 
-	<script src="../../libs/jquery-1.11.0.min.js"></script>
-	<script src="../../dist/parallax.min.js"></script>
-	<script>window.onLoad = parallax.init({el: '.parallax'})</script>
+	<script src="../../src/parallax.js"></script>
+	<script>
+		window.onLoad = parallax.init({el: '.parallax'})
+		// window.addEventListener('load', function() {
+		// 	parallax.init({el: '.parallax'});
+		// });
+	</script>
 
 </body>
 </html>
