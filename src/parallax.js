@@ -14,7 +14,8 @@
 
 	var parallax,
 		ticking = false,
-		mode = 1,
+		range,
+		mode,
 		scroll = window.scrollY,
 		height = window.innerHeight,
 		transform = (function(){
@@ -77,6 +78,9 @@
 			if ( !parallax )  { return false; }
 			if ( !transform ) { return false; }												 // progressive enhancement for newer browers only.
 
+			range = (opts.range) ? opts.range : 200;
+			mode = (opts.mode) ? opts.mode : 1;
+
 			Array.prototype.forEach.call(parallax, function(p, i){
 
 				// speed:
@@ -98,13 +102,13 @@
 
 			});
 
-			this.scrollListener = window.addEventListener('scroll', onScroll, false);
-			this.resizeListener = window.addEventListener('resize', onResize, false);
+			window.addEventListener('scroll', onScroll, false);
+			window.addEventListener('resize', onResize, false);
 		},
 		destroy: function() {
-			window.removeEventListenter(this.scrollListener);
-			window.removeEventListenter(this.resizeListener);
-			parallax = null;
+			window.removeEventListener('scroll', onScroll);
+			window.removeEventListener('resize', onResize);
+			delete root.parallax;	// no amd provision
 		}
 	};
 
