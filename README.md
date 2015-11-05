@@ -4,7 +4,7 @@ Parallax. Moves stuff on scroll.
 
 ##Introduction
 
-There are several ways to apprach building a parallax effect on a site. Paul Lewis has <a href="http://www.html5rocks.com/en/tutorials/speed/parallax/">a great overview</a> on the popular techiniques and their pros and cons. In brief:
+There are several ways to apprach building a parallax effect on a site. Paul Lewis has <a href="http://www.html5rocks.com/en/tutorials/speed/parallax/">a great overview</a> on the popular techniques and their pros and cons. In brief:
 	<ul>
 		<li><strong>absolute positioning</strong>: parallax is achieved via positioning elements
 		absolutely (this technique also includes positioning a background image attachment). In general,
@@ -29,9 +29,11 @@ Include the relevant scripts in your web page, and then*:
 
 ```html
 <script>
-	parallax.init({
-		el: '.parallax'
-	});
+	window.onload = function() {
+		parallax.init({
+			el: '.parallax'
+		});
+	}
 </script>
 ```
 
@@ -51,7 +53,7 @@ the <code>parallax</code> object as you'd wish. See [this article][article] on B
 Elements on the page can have different attributes, as referenced through particular data-atrributes. For example:
 
 ```html
-<div class="parallax item" data-parallax-speed="1" data-parallax-delay="100"></div>
+<div class="parallax item" data-parallax-speed="1"></div>
 ```
 
 

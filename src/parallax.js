@@ -51,7 +51,7 @@
 
 	function calculate(p) {
 		var offset = p.getBoundingClientRect().top,
-			range = 200,												// could be dynamic for each element
+			// range = 200,												// could be dynamic for each element
 			position;
 
 		if (height < (offset - range) ) { return; }						// dont start parallaxin' until this here thing is within range (ie. "range" pixels from the bottom of the screen)
@@ -87,7 +87,7 @@
 				// -1: translate up as fast as you scroll up ie. moving up 2x
 				//  0: normal ie. no translation
 				//  1: translate down as fast as you scroll up ie. "fixed" position
-				p.parallaxSpeed = +(p.getAttribute('data-parallax-speed') || 0);			// + is poor man's parseInt
+				p.parallaxSpeed = +(p.getAttribute('data-parallax-speed') || 1.0);			// + is poor man's parseInt
 
 
 				// Calculate each element's initial position:

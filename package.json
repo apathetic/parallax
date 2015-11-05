@@ -1,38 +1,27 @@
 {
   "name": "parallax",
-  "title": "Parallax",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A simple parallax object for parallaxin'",
-  "author": {
-    "name": "Wes Hatch",
-    "email": "whatch@hugeinc.com"
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apathetic/parallax"
+    "url": "http://whatch@stash.hugeinc.com/scm/cmpts/parallax.git"
   },
-  "bugs": {
-    "url": "https://github.com/apathetic/parallax/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/apathetic/parallax/blob/master/LICENSE-MIT"
-    }
+  "keywords": [
+    "parallax"
   ],
-  "engines": {
-    "node": ">= 0.6.0"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-connect": "~0.6.0",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-uglify": "^0.4.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-karma": "^0.8.3",
-    "karma": "^0.12.16",
-    "karma-jasmine": "^0.1.5",
-    "karma-phantomjs-launcher": "^0.1.4"
+  "author": "wes hatch",
+  "license": "MIT",
+  "dependencies": {
+    "del": "^2.0.2",
+    "gulp-connect": "^2.2.0",
+    "gulp-jshint": "^1.12.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.2"
   }
 }
