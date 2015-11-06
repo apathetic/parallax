@@ -1,170 +1,217 @@
+
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>Parallax</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Parallax</title>
+    <meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="styles.css">
 
-	<link rel="stylesheet" href="../../src/parallax.css" type="text/css">
-	<style>
-		* { -webkit-font-smoothing: antialiased; }
-		main { overflow:hidden; }
-		p { margin-bottom:1em; clear:both; }
-		.item { position:absolute; z-index:-1; opacity:0.5; background:#ccc; width:40px; height:40px; border-radius:20px; }
-		.item:nth-child(1) { top:0%; left:10% }
-		.item:nth-child(2) { top:0%; left:30% }
-		.item:nth-child(3) { top:0%; left:50% }
-		.item:nth-child(4) { top:0%; left:70% }
-		.item:nth-child(5) { top:0%; left:90% }
-		img { max-width:240px;height:auto }
-	</style>
-
-	<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+	<script src="../dist/parallax.min.js"></script>
+	<!-- <script src="https://cdn.rawgit.com/apathetic/parallax/master/dist/parallax.min.js"></script> -->
+	<script src="/showcase/components/stickynav/js/stickynav.js"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			stickyNav.init({ nav: '#sticky nav' });
+		});
+	</script>
 
 </head>
+
 <body>
-
-	<header>
-		<h1>Parallax Demo</h1>
-	</header>
-
-	<main>
-		<nav>
-			<div class="container">
-				<ul></ul>
+	<nav>
+		<div class="container">
+			<div id="sticky">
+				<nav data-autogenerate="true">
+					<ul></ul>
+				</nav>
 			</div>
-		</nav>
+		</div>
+	</nav>
+
+	<main class="site">
 
 		<section data-nav="About" id="about">
-			<div class="container">
-				<h2>About</h2>
-				<p>Parallax. Stuff moves on scroll.</p>
+			<h2>About</h2>
+			<p>Parallax. Moves stuff on scroll.</p>
 
-				<h3>A Note On Approaches</h3>
-				<p>There are several ways to apprach building a parallax effect on a site. Paul Lewis has
-				<a href="http://www.html5rocks.com/en/tutorials/speed/parallax/">a great overview</a> on the
-				popular techiniques and their pros and cons. In brief:</p>
-				<ul>
-					<li><strong>absolute positioning</strong>: this includes positioning elements absolutely
-					as well as positioning a background image attachment. In general, this is the absolute worst
-					way to do parallax from a performance point of view. Everything must be recalculated and re-
-					painted on scroll, so avoid this if possible. The upside: you can support IE8 this way.</li>
-					<li><strong>3D transforms</strong>: how the code herein operates. We offload elements in their
-					own render layer to the GPU for X- or Y-transforms. <i>Almost</i> the most efficient (see
-					below), but still very flexible and easy to implement. Browsers need to support transforms.</li>
-					<li><strong>canvas</strong>: one fixed element background (a canvas), that animates on scroll.
-					Elements are placed into the canvas moved about on scroll -- this is the most efficient, but
-					difficult to implement (or impossible if you wish to use existing DOM elements).</li>
-				</ul>
-			</div>
+			<h3>A Note On Approaches</h3>
+			<p>There are several ways to apprach building a parallax effect on a site. Paul Lewis has
+			<a href="http://www.html5rocks.com/en/tutorials/speed/parallax/">a great overview</a> on the
+			popular techiniques and their pros and cons. In brief:</p>
+			<ul>
+				<li><strong>absolute positioning</strong>: parallax is achieved via positioning elements
+				absolutely (this technique also includes positioning a background image attachment). In general,
+				this is the absolute worst way to do parallax from a performance point of view. Everything must
+				be recalculated and re-painted on scroll, so avoid this if possible. The upside: you can support
+				IE8 this way.</li>
+				<li><strong>3D transforms</strong>: how the code herein operates. We offload elements in their
+				own render layer to the GPU for X- or Y-transforms. <i>Almost</i> the most efficient (see
+				below), but still very flexible and easy to implement. Browsers need to support transforms.</li>
+				<li><strong>canvas</strong>: one fixed element background (a canvas), that animates on scroll.
+				Elements are placed into the canvas and moved about on scroll -- this is the most efficient, but
+				difficult to implement (or impossible if you wish to use existing DOM elements).</li>
+			</ul>
 		</section>
 
-		<section data-nav="Download"id="download" >
-			<div class="container">
-				<h2>Download</h2>
-				<p><a href="https://stash.hugeinc.com/projects/BOWER/repos/xxxxx/browse">Stash repo</a></p>
-			</div>
+		<section data-nav="Download" id="download" >
+			<h2>Download</h2>
+			<h3>Stash</h3>
+			<p><a href="https://stash.hugeinc.com/projects/CMPTS/repos/parallax/browse">Get it from the Stash repo</a></p>
 		</section>
 
 		<section data-nav="Demo" id="demo">
-			<div class="container">
-				<h2>Demo</h2>
+			<h2>Demo</h2>
 
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-
-				<!-- <div style="position:absolute; width:100%; height:100%; overflow:hidden;"> -->
-				<div>
-					<div class="parallax item" data-parallax-speed="1"></div>
-					<div class="parallax item" data-parallax-speed="0.5"></div>
-					<div class="parallax item" data-parallax-speed="0"></div>
-					<div class="parallax item" data-parallax-speed="-0.5"></div>
-					<div class="parallax item" data-parallax-speed="-1.0"></div>
-				</div>
-
-				<p class="parallax" data-parallax-speed="0.7">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-				<div class="parallax" data-parallax-speed="0.4" style="float:right" >
-					<img src="images/pacer.jpg" alt="" />
-				</div>
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-				<div class="parallax" data-parallax-speed="-0.4" style="float:left">
-					<img src="images/pacer.jpg" alt="" />
-				</div>
+			<div>
+				<div class="parallax item" data-parallax-speed="1"> 1 </div>
+				<div class="parallax item" data-parallax-speed="0.5"> 2 </div>
+				<div class="parallax item" data-parallax-speed="0"> 3 </div>
+				<div class="parallax item" data-parallax-speed="-0.5"> 4 </div>
+				<div class="parallax item" data-parallax-speed="-1.0"> 5 </div>
 			</div>
+
+			<p class="parallax" data-parallax-speed="1.4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+			<div class="clip">
+				<img class="parallax" data-parallax-speed="0.7" src="images/pastoral.jpg" alt="" />
+			</div>
+
+			<div class="clip">
+				<div class="backwards parallax" data-parallax-speed="-0.5"></div>
+			</div>
+
 		</section>
 
 		<section data-nav="Prereqs" id="prereqs">
-			<div class="container">
-				<h2>Prereqs</h2>
-				<p>jQuery</p>
-			</div>
+			<h2>Prereqs</h2>
+			<p>none.</p>
 		</section>
 
 		<section data-nav="Compatibility" id="compatibility">
-			<div class="container">
-				<h2>Compatibility</h2>
-				<ul>
-					<li>IE9+</li>
-					<li>Firefox, Webkit, Opera</li>
-					<li>no mobile</li>
-				</ul>
-			</div>
+			<h2>Compatibility</h2>
+			<ul>
+				<li>IE9+</li>
+				<li>Firefox, Webkit, Opera</li>
+				<li>no mobile</li>
+			</ul>
 		</section>
 
 		<section data-nav="Code" id="code">
-			<div class="container">
-				<h2>Code</h2>
-{% highlight javascript %}
-parallax.init({
-	el: '.parallax'
-});
-{% endhighlight %}
+			<h2>Code</h2>
+			<div class="highlight">
+				<pre>
+					<code class="language-javascript" data-lang="javascript">
+						<span class="nx">parallax</span>
+						<span class="p">.</span>
+						<span class="nx">init</span>
+						<span class="p">({</span>
+						<span class="nx">el</span>
+						<span class="o">:</span> <span class="s1">&#39;.parallax&#39;</span>
+						<span class="p">});</span>
+					</code>
+				</pre>
 			</div>
 		</section>
 
 		<section data-nav="Options" id="options">
-			<div class="container">
-				<h2>Options</h2>
-				<div class="table-responsive">
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th style="width: 100px;">Name</th>
-								<th style="width: 50px;">type</th>
-								<th style="width: 50px;">default</th>
-								<th>description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>el</td>
-								<td>string</td>
-								<td>parallax</td>
-								<td>selector of HTMLDomElement to use</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<h2>Options</h2>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 100px;">Name</th>
+							<th style="width: 50px;">type</th>
+							<th style="width: 50px;">default</th>
+							<th>description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>el</td>
+							<td>string</td>
+							<td>.parallax</td>
+							<td>selector of elements to parallax-ify</td>
+						</tr>
+						<tr>
+							<td>mode</td>
+							<td>integer</td>
+							<td>1</td>
+							<td>There are two different modes:<br />
+								Start parallaxing items only when they appear on screen (mode 1, default) *<br />
+								Parallax items immediately on load, irrespective of where they are on the page. (mode 0)
+							</td>
+						</tr>
+						<tr>
+							<td>range</td>
+							<td>integer</td>
+							<td>200</td>
+							<td>The total distance (in px) to parallax an element. Only applies when parallax mode = 1</td>
+						</tr>
+						<tr>
+							<td>data-parallax-speed</td>
+							<td>string</td>
+							<td>0</td>
+							<td>Data attribute on the element specifying the speed of parallax. Some examples:<br />
+								<b>-1</b>: translate up as fast as you scroll up (ie. moving upwards at 2x the scroll)<br />
+								<b>0</b>: normal (ie. no translation)<br />
+								<strong>1</strong>: translate down as fast as you scroll up (ie. "fixed" position)<br />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>* note: if an element loads within the viewport, the engine will calculate the amount of parallax based on
+				its position and adjust accordingly. Because of this, it may be a good idea to only fire the init() function
+				after all assets (ie. images, etc) have loaded.</p>
 			</div>
 		</section>
 
-		<script src="https://cdn.rawgit.com/apathetic/parallax/master/dist/parallax.min.js"></script>
-		<script>window.onLoad = parallax.init({el: '.parallax'});</script>
+		<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			parallax.init({el: '.parallax'});
+		});
+		</script>
 
 	</main>
 
+
+	<footer>
+		<div class="container">
+
+			<a href="http://hugeinc.com" title="Huge Logo" id="H-logo"> </a>
+
+			<p>Make something you love.<sup>TM</sup></p>
+
+			<div id="meta">
+
+				<a class="swap" href="http://twitter.com/hugeinc" target="_blank">
+					@hugeinc <span class="social twitter"></span>
+				</a>
+
+				<a class="swap" href="http://facebook.com/huge" target="_blank">
+					facebook.com/huge <span class="social facebook"></span>
+				</a>
+
+				<span>© 2014 Huge. All Rights Reserved.</span>
+			</div>
+
+		</div>
+	</footer>
+
 </body>
+
 </html>
