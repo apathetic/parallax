@@ -56,7 +56,6 @@
 
 		if (height < (offset - range) ) { return; }						// dont start parallaxin' until this here thing is within range (ie. "range" pixels from the bottom of the screen)
 
-
 		if (mode) {
 			// parallax items only when they appear on screen
 			position = Math.min(1, -offset / height) * range;			// 0 -> range
@@ -65,7 +64,6 @@
 			// parallax items immediately, irrespective of where they are on the page
 			position = (p.parallaxSpeed * scroll);
 		}
-
 
 		p.style[transform] = 'translate3d(0, '+ position +'px, 0)';		// no IE9, nor non 3d-accellerated browsers
 	}
@@ -121,4 +119,3 @@
 	}
 
 }( window ));
-

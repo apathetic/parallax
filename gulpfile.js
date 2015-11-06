@@ -1,12 +1,12 @@
 var gulp		= require('gulp');
-// var concat		= require('gulp-concat');
-// var del			= require('del');
+var del			= require('del');
 var uglify		= require('gulp-uglify');
 var jshint		= require('gulp-jshint');
 var rename		= require('gulp-rename');
 var connect		= require('gulp-connect');
+var karma		= require('karma');
 
-var paths = {
+var PATHS = {
 	css: ['src/*.css'],
 	js: ['src/*.js']
 };
@@ -29,25 +29,32 @@ var JSHINTRC = {
 	}
 };
 
+var KARMACONF = {
+	singleRun: true,
+	browsers: ['Chrome'],
+	frameworks: ['jasmine'],
+	files: [
+		'src/**/*.js',
+		'test/**/*.spec.js'
+	]
+};
 
 
-gulp.task('dist', function () {
-	return gulp.src(paths.js)
+gulp.task('dist', function() {
+	return gulp.src(PATHS.js)
 		.pipe(jshint(JSHINTRC))
 		.pipe(uglify())
 		.pipe(rename({ extname: '.min.js' }))
 		.pipe(gulp.dest('./dist'));
 });
 
-
-gulp.task('watch', function() {
-	// gulp.watch(paths.sass, ['css']);
-	// gulp.watch(paths.js, ['js']);	// livereload()
+gulp.task('lint', function() {
+	return gulp.src(PATHS.js)
+		.pipe(jshint(JSHINTRC))
 });
 
-
-gulp.task('test', function() {
-	// karma somehting
+gulp.task('karma', function() {
+	 new karma.Server(KARMACONF).start();
 });
 
 gulp.task('clean', function() {
@@ -64,8 +71,9 @@ gulp.task('connect', function() {
 
 
 /* ---------------------------------------
- 	2.	Server
+ 	Stuffs
  -----------------------------------------*/
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build', 'connect']);
 gulp.task('build', ['clean', 'dist']);
+gulp.task('test', ['lint', 'karma']);
