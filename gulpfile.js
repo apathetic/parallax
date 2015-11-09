@@ -65,7 +65,7 @@ gulp.task('clean', function() {
 
 gulp.task('connect', function() {
 	connect.server({
-		livereload: true
+		port: 8002
 	});
 });
 

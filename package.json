@@ -1,6 +1,6 @@
 {
   "name": "parallax",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A simple parallax object for parallaxin'",
   "directories": {
     "test": "test"
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://whatch@stash.hugeinc.com/scm/cmpts/parallax.git"
+    "url": "https://github.com/apathetic/parallax.git"
   },
   "keywords": [
     "parallax"
