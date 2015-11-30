@@ -12,6 +12,7 @@
 
 	<!-- demo stuffs -->
 	<link rel="stylesheet" href="showcase-styles.css">
+	<script src="prism.js"></script>
 	<script src="https://cdn.rawgit.com/apathetic/stickynav/master/dist/stickynav.min.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
@@ -40,7 +41,7 @@
 		</div>
 	</nav>
 
-	<main class="site left-rail">
+	<main class="component left-rail">
 
 		<section data-nav="About" id="about">
 			<div class="container">
@@ -132,19 +133,11 @@
 		<section data-nav="Code" id="code">
 			<div class="container">
 				<h2>Code</h2>
-				<div class="highlight">
-					<pre>
-						<code class="language-javascript" data-lang="javascript">
-							<span class="nx">parallax</span>
-							<span class="p">.</span>
-							<span class="nx">init</span>
-							<span class="p">({</span>
-							<span class="nx">el</span>
-							<span class="o">:</span> <span class="s1">&#39;.parallax&#39;</span>
-							<span class="p">});</span>
-						</code>
-					</pre>
-				</div>
+				<pre><code class="language-javascript">
+	parallax.init({
+		el: '.parallax'
+	});
+				</code></pre>
 			</div>
 		</section>
 
