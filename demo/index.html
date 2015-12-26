@@ -2,13 +2,12 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Parallax</title>
-    <meta name="viewport" content="width=device-width">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Parallax</title>
+	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="styles.css">
-	<script src="../dist/parallax.min.js"></script>
 
 	<!-- demo stuffs -->
 	<link rel="stylesheet" href="showcase-styles.css">
@@ -17,7 +16,6 @@
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
 			stickyNav.init({ nav: '#sticky' });
-			parallax.init({ el: '.parallax' });
 		});
 	</script>
 	<!-- end demo stuffs -->
@@ -49,13 +47,13 @@
 				<p>Parallax. Moves stuff on scroll.</p>
 
 				<h3>A Note On Approaches</h3>
-				<p>There are several ways to apprach building a parallax effect on a site. Paul Lewis has
+				<p>There are several ways to approach building a parallax effect on a site. Paul Lewis has
 				<a href="http://www.html5rocks.com/en/tutorials/speed/parallax/">a great overview</a> on the
 				popular techiniques and their pros and cons. In brief:</p>
 				<ul>
 					<li><strong>absolute positioning</strong>: parallax is achieved via positioning elements
 					absolutely (this technique also includes positioning a background image attachment). In general,
-					this is the absolute worst way to do parallax from a performance point of view. Everything must
+					this is the worst way to do parallax from a performance point of view. Everything must
 					be recalculated and re-painted on scroll, so avoid this if possible. The upside: you can support
 					IE8 this way.</li>
 					<li><strong>3D transforms</strong>: how the code herein operates. We offload elements in their
@@ -166,8 +164,8 @@
 								<td>integer</td>
 								<td>1</td>
 								<td>There are two different modes:<br />
-									Start parallaxing items only when they appear on screen (mode 1, default) *<br />
-									Parallax items immediately on load, irrespective of where they are on the page. (mode 0)
+									Commence parallaxing items only when they appear within the viewport (mode 1, default) *<br /><br />
+									Parallax items universally, irrespective of where they are on the page. (mode 0)
 								</td>
 							</tr>
 							<tr>
@@ -203,6 +201,13 @@
 		</div>
 	</footer>
 
+
+	<script src="../dist/parallax.min.js"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			parallax.init({ el: '.parallax' });
+		});
+	</script>
 
 </body>
 
