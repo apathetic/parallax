@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "main": "./dist/parallax.cjs.js",
-  "broswer": "./dist/parallax.browser.js",
+  "broswer": "./dist/parallax.js",
   "jsnext:main": "./dist/parallax.es6.js",
   "repository": {
     "type": "git",

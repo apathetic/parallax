@@ -10,6 +10,6 @@ export default {
   targets: [
     { dest: 'dist/parallax.cjs.js', format: 'cjs' },
     { dest: 'dist/parallax.es6.js', format: 'es' },
-    { dest: 'dist/parallax.browser.js', format: 'iife' }
+    { dest: 'dist/parallax.js', format: 'iife' }
   ]
 };
