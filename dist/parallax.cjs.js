@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * parallax
  * https://github.com/apathetic/parallax
@@ -8,17 +10,17 @@
  */
 
 
-let parallax;
-let ticking = false;
-let range;
-let mode;
-let scroll = window.scrollY;
-let height = window.innerHeight;
+var parallax;
+var ticking = false;
+var range;
+var mode;
+var scroll = window.scrollY;
+var height = window.innerHeight;
 
-const transform = (function() {
-  const transforms = ['transform', 'webkitTransform', 'MozTransform', 'OTransform'];
-  const el = document.createElement('fake');
-  let i = transforms.length;
+var transform = (function() {
+  var transforms = ['transform', 'webkitTransform', 'MozTransform', 'OTransform'];
+  var el = document.createElement('fake');
+  var i = transforms.length;
 
   for (i; --i;) {
     // note: we don't test "ms" prefix, (as that gives us IE9 which doesn't support
@@ -69,7 +71,7 @@ function calculate(p) {
 }
 
 
-export default {
+var parallax$1 = {
   init: function(opts) {
     parallax = document.querySelectorAll(opts.el || '.parallax');
 
@@ -108,3 +110,5 @@ export default {
     window.removeEventListener('resize', onResize);
   }
 };
+
+module.exports = parallax$1;

@@ -67,14 +67,6 @@
 			</div>
 		</section>
 
-		<section data-nav="Download" id="download">
-			<div class="container">
-				<h2>Download</h2>
-				<h3>Stash</h3>
-				<p><a href="https://stash.hugeinc.com/projects/CMPTS/repos/parallax/browse">Get it from the Stash repo</a></p>
-			</div>
-		</section>
-
 		<section data-nav="Demo" id="demo">
 			<div class="container">
 				<h2>Demo</h2>
@@ -102,7 +94,7 @@
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 				<div class="clip">
-					<img class="parallax" data-parallax-speed="0.7" src="https://cdn.rawgit.com/apathetic/parallax/master/demo/images/pastoral.jpg" alt="" />
+					<img class="parallax" data-parallax-speed="0.7" src="images/pastoral.jpg" alt="" />
 				</div>
 
 				<div class="clip">
@@ -203,10 +195,10 @@
 	</footer>
 
 
-	<script src="../dist/parallax.min.js"></script>
+	<script src="../dist/parallax.browser.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			parallax.init({ el: '.parallax' });
+			Parallax.init({ el: '.parallax' });
 		});
 	</script>
 
