@@ -10,22 +10,23 @@
 	<link rel="stylesheet" href="styles.css">
 
 	<!-- demo stuffs -->
-	<link rel="stylesheet" href="https://rawgit.com/apathetic/showcase/harp/www/css/styles.css">
+	<link rel="stylesheet" href="https://apathetic.github.io/showcase/assets/css/main.min.css">
+	<script src="https://rawgit.com/apathetic/stickynav/master/dist/stickyNav.js"></script>
 	<script src="prism.js"></script>
-	<script src="https://rawgit.com/apathetic/stickynav/master/dist/stickynav.min.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			stickyNav.init({ nav: '#sticky' });
+			new stickyNav({ nav: '#sticky' });
 		});
 	</script>
 	<!-- end demo stuffs -->
+
 
 </head>
 
 <body>
 
 
-	<header>
+	<header class="condensed align-center">
 		<h1>Parallax.</h1>
 	</header>
 
@@ -66,14 +67,6 @@
 			</div>
 		</section>
 
-		<section data-nav="Download" id="download">
-			<div class="container">
-				<h2>Download</h2>
-				<h3>Stash</h3>
-				<p><a href="https://stash.hugeinc.com/projects/CMPTS/repos/parallax/browse">Get it from the Stash repo</a></p>
-			</div>
-		</section>
-
 		<section data-nav="Demo" id="demo">
 			<div class="container">
 				<h2>Demo</h2>
@@ -101,7 +94,7 @@
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 				<div class="clip">
-					<img class="parallax" data-parallax-speed="0.7" src="https://cdn.rawgit.com/apathetic/parallax/master/demo/images/pastoral.jpg" alt="" />
+					<img class="parallax" data-parallax-speed="0.7" src="images/pastoral.jpg" alt="" />
 				</div>
 
 				<div class="clip">
@@ -202,10 +195,10 @@
 	</footer>
 
 
-	<script src="../dist/parallax.min.js"></script>
+	<script src="../dist/parallax.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			parallax.init({ el: '.parallax' });
+			Parallax.init({ el: '.parallax' });
 		});
 	</script>
 
