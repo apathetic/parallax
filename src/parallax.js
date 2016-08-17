@@ -47,21 +47,22 @@ function updateParallax() {
 }
 
 function calculate(p) {
-  var offset = p.getBoundingClientRect().top,
-    // range = 200,                        // could be dynamic for each element
-    position;
+  const offset = p.getBoundingClientRect().top;
+  // const range = p.parallaxRange || range;
+  const speed = p.parallaxSpeed;
 
-  // dont start parallaxin' until this here thing is within range (ie. "range"
-  // pixels from the bottom of the screen)
-  if (height < offset - range) { return; }
+  let position;
 
   if (mode) {
-    // parallax items only when they appear on screen
-    position = Math.min(1, -offset / height) * range;      // 0 -> range
-    position *= p.parallaxSpeed;
+    // dont start parallaxin' until this here thing is within range (ie. "range"
+    // pixels from the bottom of the screen)
+    if (height < offset - range) { return; }
+
+    position = -offset / height * range;      // -1 -> 0.... -range -> 0
+    position *= speed;
   } else {
     // parallax items immediately, irrespective of where they are on the page
-    position = p.parallaxSpeed * scroll;
+    position = speed * scroll;
   }
 
   // no IE9, nor non 3d-accellerated browsers
@@ -70,11 +71,12 @@ function calculate(p) {
 
 
 export default {
-  init: function(opts) {
-    parallax = document.querySelectorAll(opts.el || '.parallax');
+  init: function(element, opts = {}) {
+    parallax = document.querySelectorAll(element || '.parallax');
 
     if (!parallax || !transform) { return false; }
 
+    // Object.assign({range:200, mode:1}, opts);
     range = opts.range ? opts.range : 200;
     mode = opts.mode ? opts.mode : 1;
 
@@ -84,20 +86,22 @@ export default {
       // -1: translate up as fast as you scroll up ie. moving up 2x
       //  0: normal ie. no translation
       //  1: translate down as fast as you scroll up ie. "fixed" position
-      p.parallaxSpeed = +(p.getAttribute('data-parallax-speed') || 1.0);      // + is "parseInt"
+      p.parallaxSpeed = +(p.getAttribute('data-parallax-speed') || 0);      // + is "parseInt"
 
+      // range:
+      // the distance to parallax the element once it's on screen
+      p.parallaxRange = +(p.getAttribute('data-parallax-range') || 0);      // + is "parseInt"
 
       // Calculate each element's initial position:
       // here we find the limit as the offset and adjustment converge:
-      var current = p.getBoundingClientRect().top;
-      var last = 0;
+      let current = p.getBoundingClientRect().top;
+      let last = 0;
 
       while (Math.abs(current - last) > 1) {
         last = current;
         calculate(p);
         current = p.getBoundingClientRect().top;
       }
-
     });
 
     window.addEventListener('scroll', onScroll, false);

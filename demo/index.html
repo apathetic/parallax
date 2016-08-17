@@ -125,9 +125,12 @@
 			<div class="container">
 				<h2>Code</h2>
 				<pre><code class="language-javascript">
-	parallax.init({
-		el: '.parallax'
-	});
+var options = {
+	speed: 0.5,
+	range: 100
+}
+
+Parallax.init('.parallax', options);
 				</code></pre>
 			</div>
 		</section>
@@ -165,10 +168,10 @@
 								<td>range</td>
 								<td>integer</td>
 								<td>200</td>
-								<td>The total distance (in px) to parallax an element. Only applies when parallax mode = 1</td>
+								<td>The total distance (in px) to parallax an element. Only applies when mode = 1</td>
 							</tr>
 							<tr>
-								<td>data-parallax-speed</td>
+								<td>speed</td>
 								<td>string</td>
 								<td>0</td>
 								<td>Data attribute on the element specifying the speed of parallax. Some examples:<br />
@@ -198,7 +201,7 @@
 	<script src="../dist/parallax.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			Parallax.init({ el: '.parallax' });
+			Parallax.init('.parallax');
 		});
 	</script>
 
